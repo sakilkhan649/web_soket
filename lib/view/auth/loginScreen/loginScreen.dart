@@ -6,6 +6,7 @@ import 'package:websoket/widgets/Custom_button.dart';
 import 'package:websoket/widgets/custom_text_fild.dart';
 import '../../../controller/auth_controller.dart';
 import '../../../utils/colors.dart';
+import '../../homeScreen/homeScreen.dart';
 import '../registerScreen/registerScreen.dart';
 
 class Loginscreen extends StatelessWidget {
@@ -67,7 +68,17 @@ class Loginscreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 30),
-                  CustomButton(label: "Log In", onTap: () {}),
+                  Obx(
+                    () => CustomButton(
+                      label: controller.isLoading.value
+                          ? "Loading..."
+                          : "Log In",
+                      onTap: () {
+                        Get.to(() => Homescreen());
+                        // controller.login();
+                      },
+                    ),
+                  ),
                   const SizedBox(height: 10),
                   TextButton(
                     onPressed: () {

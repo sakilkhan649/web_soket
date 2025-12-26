@@ -7,6 +7,7 @@ import '../../../controller/auth_controller.dart';
 import '../../../utils/colors.dart';
 import '../../../widgets/Custom_button.dart';
 import '../../../widgets/custom_text_fild.dart';
+import '../../homeScreen/homeScreen.dart';
 
 class Registerscreen extends StatelessWidget {
   Registerscreen({super.key});
@@ -105,18 +106,13 @@ class Registerscreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 30),
-                CustomButton(label: "Log In", onTap: () {}),
-                const SizedBox(height: 10),
-                TextButton(
-                  onPressed: () {
-                   // Get.to(() => Registerscreen());
-                  },
-                  child: Text(
-                    'CREATE A NEW ACCOUNT',
-                    style: TextStyle(
-                      color: AppColors.primary.withOpacity(.5),
-                      fontWeight: FontWeight.w700,
-                    ),
+                Obx(
+                  () => CustomButton(
+                    label: controller.isLoading.value ? "Loading..." : "Sign Up",
+                    onTap: () {
+                      Get.to(() => Homescreen());
+                     // controller.register();
+                    },
                   ),
                 ),
               ],

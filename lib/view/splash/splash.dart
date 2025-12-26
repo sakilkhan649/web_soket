@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:websoket/core/services/shared_services.dart';
+import 'package:websoket/view/homeScreen/homeScreen.dart';
 
 import '../auth/loginScreen/loginScreen.dart';
 
@@ -16,9 +18,19 @@ class _SplashscreenState extends State<Splashscreen> {
   @override
   void initState() {
     super.initState();
+    print(SharedServices.getData(SetType.string, 'token'));
     Timer(const Duration(seconds: 3), () {
       Get.offAll(() => Loginscreen());
     });
+  }
+
+  checkToken() async {
+    final token = await SharedServices.getData(SetType.string, 'token');
+    if (token != null) {
+      Get.offAll(() => Homescreen());
+    } else {
+      Get.offAll(() => Loginscreen());
+    }
   }
 
   @override
